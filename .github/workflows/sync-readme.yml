@@ -1,0 +1,23 @@
+name: Sync README.md to Docker Hub
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v2
+    -
+      name: Docker Hub README & description sync
+      uses: meeDamian/sync-readme@v1.0.6
+      with:
+        user: ${{ secrets.DOCKER_USERNAME }}
+        pass: ${{ secrets.DOCKER_PASSWORD }}
+        slug: ${{ secrets.DOCKER_USERNAME }}/cups-brother-mfc9140cdn
+        readme: ./README.md
+        description: Cups Docker image for Brother MFC-9140CDN.
